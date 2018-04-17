@@ -4,7 +4,7 @@ Chris Stafford
 #### Goal:
 ***Predict wine quality using satellite images.***
 
-Wine can vary greatly from one year to another? This is called vintage variation and it affects certain wines and growing regions more than others. Cooler climates and regions with higher variable weather tend to have greater variation between vintages. So how do you know what the ‘best vintages’ are?
+Wine can vary greatly from one year to another. This is called vintage variation and it affects certain wines and growing regions more than others. Cooler climates and regions with higher variable weather tend to have greater variation between vintages. So how do you know what the ‘best vintages’ are?
 
 ###### Climate Indicators of a Bad Vintage
     Rain at the end of a growing season can lead to watery grapes with less flavor.
@@ -27,3 +27,29 @@ Nasa's landsat program is the worlds longest continuous land remote sensing.  Th
 Shortwave infrared pick up signals of wet soil and rock
 Thermal infrared can tell land surface temperature
 Combining other channels can distinguish soil types and other more complicated features.
+
+
+#### Getting Data
+Wine Enthusiast
+
+<img alt="intro" src="figs/wine-enthusiast.png" width='500'>
+
+Landsat 8
+<img alt="intro" src="figs/landsat.png" width='500'>
+
+#### Scope
+To start I narrowed my data down to the Western US 2014 vintages.  Looking for a wine that has a lot of variation in scores.
+
+<img alt="intro" src="figs/score-distribution.png" width='500'>
+
+I chose Pinot Noir because of its large sample size and large distribution.
+
+#### Modeling
+Using my entirely too small data set ~40 wines
+
+|Model|RMSE|
+|---|---|
+|Mean|1.986|
+|Random Forest|1.446|
+
+<img alt="intro" src="figs/rfr-feat-import.png" width='500'>
