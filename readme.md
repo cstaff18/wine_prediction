@@ -45,7 +45,9 @@ To start I narrowed my data down to the Western US 2014 vintages.  Looking for a
 I chose Pinot Noir because of its large sample size and large distribution.
 
 #### Modeling
-4 tiles, 1 growing season, ~150 wines
+4 tiles, 1 growing season, ~150 Pinot Noir wines
+
+<img alt="intro" src="figs/PN-score-dist.png" width='500'>
 
 |Model|RMSE|
 |---|---|
@@ -54,5 +56,8 @@ I chose Pinot Noir because of its large sample size and large distribution.
 |2 Hidden Layer MLP| 1.643|
 
 
-
+###### Random Forest
 <img alt="intro" src="figs/rfr-feat-import.png" width='500'>
+
+###### Neural network
+<img alt="intro" src="figs/ner-arch.png" width='500'>
