@@ -9,14 +9,15 @@ import json
 import glob
 
 
-BASE_URL = 'https://www.winemag.com/?s=&drink_type=wine&varietal=Pinot%20Noir&vintage=2016&page={0}'
+BASE_URL = 'https://www.winemag.com/?s=&drink_type=wine&vintage=2014&page={0}'
 session = requests.Session()
 HEADERS = {
     'user-agent': ('Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 '
                    '(KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36')
 }
 DATA_DIR = 'data'
-FILENAME = 'winemag-data'
+YEAR = 2014
+FILENAME = 'winemag-data-{}'.format(YEAR)
 
 UNKNOWN_FORMAT = 0
 APPELLATION_FORMAT_0 = 1
@@ -302,7 +303,7 @@ class ReviewFormatException(Exception):
 
 if __name__ == '__main__':
     # Total review results on their site are conflicting, hardcode as the max tested value for now
-    pages_to_scrape = (1, 85)
+    pages_to_scrape = (1, 567)
     winmag_scraper = Scraper(pages_to_scrape=pages_to_scrape, num_jobs=10, clear_old_data=False)
 
     # Step 1: scrape data

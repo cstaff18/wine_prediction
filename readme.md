@@ -45,11 +45,14 @@ To start I narrowed my data down to the Western US 2014 vintages.  Looking for a
 I chose Pinot Noir because of its large sample size and large distribution.
 
 #### Modeling
-Using my entirely too small data set ~40 wines
+4 tiles, 1 growing season, ~150 wines
 
 |Model|RMSE|
 |---|---|
 |Mean|1.986|
 |Random Forest|1.446|
+|2 Hidden Layer MLP| 1.643|
+
+
 
 <img alt="intro" src="figs/rfr-feat-import.png" width='500'>
