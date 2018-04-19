@@ -47,7 +47,6 @@ I chose Pinot Noir because of its large sample size and large distribution.
 #### Modeling
 4 tiles, 1 growing season, ~150 Pinot Noir wines
 
-<img alt="intro" src="figs/PN-score-dist.png" width='500'>
 
 |Model|RMSE|
 |---|---|
@@ -55,9 +54,18 @@ I chose Pinot Noir because of its large sample size and large distribution.
 |Random Forest|1.446|
 |2 Hidden Layer MLP| 1.643|
 
+<img alt="intro" src="figs/PN-score-dist.png" width='500'>
 
+<img alt="intro" src="figs/PN-pred-score-dist.png" width='500'>
 ###### Random Forest
 <img alt="intro" src="figs/rfr-feat-import.png" width='500'>
 
 ###### Neural network
 <img alt="intro" src="figs/ner-arch.png" width='500'>
+
+#### Results
+<img alt="intro" src="figs/map3.png" width='500'>
+
+-------
+
+<img alt="intro" src="figs/map1.png" width='500'>
