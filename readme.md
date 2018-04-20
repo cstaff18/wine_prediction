@@ -35,6 +35,7 @@ Wine Enthusiast
 <img alt="intro" src="figs/wine-enthusiast.png" width='500'>
 
 Landsat 8
+
 <img alt="intro" src="figs/landsat.png" width='500'>
 
 #### Scope
@@ -60,9 +61,18 @@ I chose Pinot Noir because of its large sample size and large distribution.
 
 
 ###### Neural network
+
+
+Input
+
+<img alt="intro" src="figs/Xmat.png" width='500'>
+
+Architecture
+
 <img alt="intro" src="figs/ner-arch.png" width='500'>
 
 #### Results
+<img alt="intro" src="figs/results-scale.png" width='500'>
 <img alt="intro" src="figs/map3.png" width='500'>
 
 -------
