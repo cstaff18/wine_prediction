@@ -52,15 +52,12 @@ I chose Pinot Noir because of its large sample size and large distribution.
 |---|---|
 |Mean|1.986|
 |Random Forest|1.446|
-|2 Hidden Layer MLP| 1.643|
+|2 Hidden Layer MLP (CV)| 1.643|
 
-<img alt="intro" src="figs/PN-score-dist.png" width='500'>
+
 
 <img alt="intro" src="figs/PN-pred-score-dist.png" width='500'>
 
-###### Random Forest
-
-<img alt="intro" src="figs/rfr-feat-import.png" width='500'>
 
 ###### Neural network
 <img alt="intro" src="figs/ner-arch.png" width='500'>
