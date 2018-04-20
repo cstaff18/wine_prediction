@@ -57,9 +57,6 @@ I chose Pinot Noir because of its large sample size and large distribution.
 
 
 
-<img alt="intro" src="figs/PN-pred-score-dist.png" width='500'>
-
-
 ###### Neural network
 
 
@@ -70,6 +67,11 @@ Input
 Architecture
 
 <img alt="intro" src="figs/ner-arch.png" width='500'>
+
+Predictions
+<img alt="intro" src="figs/PN-pred-score-dist.png" width='500'>
+
+
 
 #### Results
 <img alt="intro" src="figs/results-scale.png" width='500'>
