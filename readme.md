@@ -31,10 +31,13 @@ Combining other channels can distinguish soil types and other more complicated f
 
 #### Getting Data
 Wine Enthusiast
+I modified a web scraper from Zachthoutt to gather data from Wine Enthusiast. Latitude and longitude was derived from the designated vineyard location when location information could be found.  Designated vineyards are required to produce 95% of the grapes used in a wine.
 
 <img alt="intro" src="figs/wine-enthusiast.png" width='500'>
 
 Landsat 8
+
+Landsat images were acquired from AWS for the growing season, February through October, every 16 days. I defined a vineyard to be 10 acres and took the average pixel intensity from each band and each time interval for a vineyard.
 
 <img alt="intro" src="figs/landsat.png" width='500'>
 
@@ -61,6 +64,7 @@ I chose Pinot Noir because of its large sample size and large distribution.
 
 
 Input
+Below shows the input space for each wine.  The y-axis depicts the spectral channel and the x-axis corresponds to the time stamp, 0 being early Feb, 14 being late Sept.  The input matrix was flattened and fed into the RandomForest and MLP algorithms.
 
 <img alt="intro" src="figs/Xmat.png" width='500'>
 
@@ -71,7 +75,7 @@ Architecture
 Predictions
 <img alt="intro" src="figs/PN-pred-score-dist.png" width='500'>
 
-
+The above shows the distribution of predicted scores and ground truth scores.  My model has a hard time predicting extreme values.  
 
 #### Results
 <img alt="intro" src="figs/results-scale.png" width='500'>
