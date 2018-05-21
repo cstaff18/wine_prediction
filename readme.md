@@ -1,10 +1,13 @@
 ## Predicting Wine Ratings with Remote Sensing Data:
 Chris Stafford
 
-#### Goal:
-***Predict wine quality using satellite images.***
+A grape from a marquee vineyard designations, and exceptional vintage are two features that distinguish superior wines. But what makes those grapes so good? Climate is the most significant factor in determining a grape’s inherent qualities. Climate can vary on small scales due to variables such as altitude, distance to bodies of water, etc. These variables can affect grape quality. Climate can also vary from year to year and affect grape quality.
 
-Wine can vary greatly from one year to another. This is called vintage variation and it affects certain wines and growing regions more than others. Cooler climates and regions with higher variable weather tend to have greater variation between vintages. So how do you know what the ‘best vintages’ are?
+#### Goal:
+***Predict grape quality using satellite images.***
+Create a model of grape quality that can account for the spatial and temporal variation in climate.
+
+So how do you know what the best vineyards are?
 
 ###### Climate Indicators of a Bad Vintage
     Rain at the end of a growing season can lead to watery grapes with less flavor.
@@ -14,7 +17,7 @@ Wine can vary greatly from one year to another. This is called vintage variation
     A damp early season affects young vines that don’t photosynthesize properly and can cause shatter.
 
 ###### Why Satellite Images?
-Nasa's landsat program is the worlds longest continuous land remote sensing.  Their newest satellite capures images on 11 spectral frequencies.
+Nasa's landsat program is the worlds longest continuous land remote sensing.  Their newest satellite captures images on 11 spectral frequencies, and captures images of the entire planet every 16 days.  These images have a high spacial resolution, a single pixel being 30m x 30m.  This allows me to capture information on the growing season at the mesoclimate scale and even approach micro climate scales.  Below are a brief description of the spectral frequencies and what they try to capture.
 
     Band 1: Deep blues and violets
     Bands 2-4: Visible blue, green, and red
@@ -24,63 +27,57 @@ Nasa's landsat program is the worlds longest continuous land remote sensing.  Th
     Band 9: Wavelengths 1370 ± 10 nanometers
     Bands 10,11: Thermal infrared
 
-Shortwave infrared pick up signals of wet soil and rock
-Thermal infrared can tell land surface temperature
-Combining other channels can distinguish soil types and other more complicated features.
+From this information we can deduce important features of the climate and geology.
+
+    Shortwave infrared pick up signals of wet soil and rock
+    Thermal infrared can tell land surface temperature
+    Combining other channels can distinguish soil types and other more complicated features.
+
+  <img alt="intro" src="figs/landsat.png" width='500'>
+
 
 
 #### Getting Data
 Wine Enthusiast
-I modified a web scraper from Zachthoutt to gather data from Wine Enthusiast. Latitude and longitude was derived from the designated vineyard location when location information could be found.  Designated vineyards are required to produce 95% of the grapes used in a wine.
+I modified a web scraper from Zachthoutt to gather data from Wine Enthusiast. Latitude and longitude were acquired for the designated vineyard location when location information could be found.  Designated vineyards are required to produce 95% of the grapes used in a wine. The wine score, a 20 point scale from 80-100, will be use as targets for my modeling.
 
 <img alt="intro" src="figs/wine-enthusiast.png" width='500'>
 
+
 Landsat 8
 
-Landsat images were acquired from AWS for the growing season, February through October, every 16 days. I defined a vineyard to be 10 acres and took the average pixel intensity from each band and each time interval for a vineyard.
+Landsat images were acquired by utilizing the GDAL vsis3 file handler on images from Amazon's public landsat S3 bucket. I defined a vineyard to be 10 acres and took the average pixel intensity from each band and each time interval for a vineyard for 16 time samples throughout the growing season.
 
-<img alt="intro" src="figs/landsat.png" width='500'>
+<img alt="intro" src="figs/FeatureExtraction.png" width='500'>
 
 #### Scope
-To start I narrowed my data down to the Western US 2014 vintages.  Looking for a wine that has a lot of variation in scores.
+Different wines have different factors that can distinguish an optimal growing season.  I chose to start on a single wine type.
 
 <img alt="intro" src="figs/score-distribution.png" width='500'>
 
-I chose Pinot Noir because of its large sample size and large distribution.
+I chose Pinot Noir because of its large sample size and large distribution.  I will continue the project only looking at Pinot Noir but the process should be able to generalize with any wine type.
 
 #### Modeling
-4 tiles, 1 growing season, ~150 Pinot Noir wines
+I chose to use RMSE as my error metric because my labels of wine scores are an imperfect estimator of grape quality:
 
+    Great grapes are important but not the sole factor for creating a great wine.
+    Wine ratings are themselves subjective.
+
+For these reasons I should expect some inherent error in my predictions and should focus on predictions that are far away from the actual wine score.
+
+I excluded 2 spectral bands and the quality information because initial modeling did not show them to be predictive.  After testing several models I chose to use a gradient boosting regression tree architecture to predict wine quality.
+
+My final model uses 9 gradient boosted regression trees on individual spectral bands. An additional gradient boosted regression tree is then run on the output of individual band models.
 
 |Model|RMSE|
 |---|---|
-|Mean|1.986|
-|Random Forest|1.446|
-|2 Hidden Layer MLP (CV)| 1.643|
+|Mean| 2.92|
+|Regional Means| 2.38|
+|Gradient Boosting Regressor| 2.08|
 
-
-
-###### Neural network
-
-
-Input
-Below shows the input space for each wine.  The y-axis depicts the spectral channel and the x-axis corresponds to the time stamp, 0 being early Feb, 14 being late Sept.  The input matrix was flattened and fed into the RandomForest and MLP algorithms.
-
-<img alt="intro" src="figs/Xmat.png" width='500'>
-
-Architecture
-
-<img alt="intro" src="figs/ner-arch.png" width='500'>
-
-Predictions
-<img alt="intro" src="figs/PN-pred-score-dist.png" width='500'>
-
-The above shows the distribution of predicted scores and ground truth scores.  My model has a hard time predicting extreme values.  
+Guessing the mean wine score has an RMSE of 2.92. Using a more sophisticated averaging technique of guessing the regional average and reduce the error to 2.38.  My model can improve the regional mean model by an additional 12%.
 
 #### Results
+Click [here](http://ec2-52-39-158-110.us-west-2.compute.amazonaws.com:8080/) to interactively explore predicted Pinot Noir vineyard quality for 2017. Individual dots show the predicted value and fall on the scale below.
 <img alt="intro" src="figs/results-scale.png" width='500'>
 <img alt="intro" src="figs/map3.png" width='500'>
-
--------
-
-<img alt="intro" src="figs/map1.png" width='500'>
