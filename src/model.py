@@ -5,8 +5,16 @@ from sklearn.metrics import mean_squared_error
 
 
 class GBRmodel:
+    '''
+    Optimized model for predicting wine score on an 80-100 point scale. X data
+    should be a numpy matrix of pixel averages from landsat 8 satellite images.
+    y data are Pinot Noir wine scores from Wine Enthusiast. Uses 9 gbr models
+    on 9 spectral channels of landsat images, and an additional gbr model on the
+    output of those 9 channel models.
+    '''
 
     def __init__(self):
+        '''define all 10 gbr models'''
         self.gbr0 = GradientBoostingRegressor()
         self.gbr1 = GradientBoostingRegressor()
         self.gbr2 = GradientBoostingRegressor()
@@ -21,8 +29,8 @@ class GBRmodel:
 
     def featurize(self,X):
         '''
-        Takes numpy 2d matrix of avg pixel values, returns numpy 2d arrays
-        Convert raw mean of median pixel values to matrices of features
+        Takes numpy 2d matrix of avg pixel values, returns list of numpy 2d
+        arrays. Convert raw mean of median pixel values to matrices of features
         to be used in training or predicting
         '''
         #Select only pixel values from the growing season
@@ -65,7 +73,10 @@ class GBRmodel:
 
 
     def predict(self,X):
-
+        '''
+        Predicts scores from 9 channel models and the stacked final model.
+        Outputs only the predicted values from the final model.
+        '''
         bands = self.featurize(X)
         regressors = [self.gbr0,self.gbr1,self.gbr2,self.gbr3,self.gbr4,self.gbr6,
             self.gbr7,self.gbr9,self.gbr10]
@@ -93,4 +104,3 @@ if __name__ == '__main__':
 
     Xmean2017 = genfromtxt('Xmean2017.csv', delimiter=',')
     yy = gbr.predict(Xmean2017)
-    

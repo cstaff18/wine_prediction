@@ -9,6 +9,12 @@ from osgeo import gdal, gdalnumeric, ogr, osr
 import pdb
 import pickle
 
+'''
+This Script creates of dictionary of unique path,row,vintages in a pandas
+data frame and their correspoding files and paths of landsat 8 images in
+the public landsat AWS S3 bucket.
+'''
+
 
 def create_dict (df):
     scene_dict = {}
