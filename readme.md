@@ -79,5 +79,6 @@ Guessing the mean wine score has an RMSE of 2.92. Using a more sophisticated ave
 
 #### Results
 Click [here](http://ec2-52-39-158-110.us-west-2.compute.amazonaws.com:8080/) to interactively explore predicted Pinot Noir vineyard quality for 2017. Individual dots show the predicted value and fall on the scale below.
+
 <img alt="intro" src="figs/results-scale.png" width='500'>
 <img alt="intro" src="figs/map3.png" width='500'>
