@@ -1,7 +1,13 @@
 ## Predicting Wine Ratings with Remote Sensing Data:
 Chris Stafford
 
+[Map of 2017 Pinot Noir Predictions](http://ec2-52-39-158-110.us-west-2.compute.amazonaws.com:8080/)
+
+
 A grape from a marquee vineyard designations, and exceptional vintage are two features that distinguish superior wines. But what makes those grapes so good? Climate is the most significant factor in determining a grape’s inherent qualities. Climate can vary on small scales due to variables such as altitude, distance to bodies of water, etc. These variables can affect grape quality. Climate can also vary from year to year and affect grape quality.
+
+
+
 
 #### Goal:
 
