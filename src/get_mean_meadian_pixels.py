@@ -70,6 +70,7 @@ def mean_med_pixel(df,scene_dict,Xmat_mean,Xmat_median):
                     Xmat_median[i,j] = np.median(np_array)
             except:
                 print(i,j,'not updated')
+                break
 
     np.savetxt('Xmean2017.csv',Xmat_mean,delimiter = ',')
     np.savetxt('Xmedian2017.csv',Xmat_mean,delimiter = ',')

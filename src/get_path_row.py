@@ -4,7 +4,11 @@ import shapely.geometry
 import urllib
 import zipfile
 import pandas as pd
+import numpy as np
 
+'''
+use to map lat lon to WRS2 coord system and add to dataframe
+'''
 
 
 
@@ -18,7 +22,7 @@ def checkPoint(feature, point, mode):
 
 
 def get_path_row(lat,lon):
-    shapefile = 'wrs2_asc_desc/wrs2_asc_desc.shp'
+    shapefile = '../data/wrs2_asc_desc/wrs2_asc_desc.shp'
     wrs = ogr.Open(shapefile)
     layer = wrs.GetLayer(0)
 
@@ -48,9 +52,9 @@ def update_df(df):
     return df
 
 if __name__ == '__main__':
-    df = pd.read_csv('pinot_noir_with_lat_lon.csv')
-    df = df[df.vintage == 2014]
-    df = df[df.lat > 0]
+    df = pd.read_csv('../data/pinot_noir_with_year.csv')
+    #df = df[df.vintage == 2014]
+    df = df[np.isfinite(df['lat'])]
     df = update_df(df)
 
     df.to_csv('pinot_noir_with_path_row.csv')

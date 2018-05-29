@@ -11,14 +11,13 @@ from sklearn.preprocessing import StandardScaler
 from keras.callbacks import TensorBoard
 import tensorflow as tf
 
+'''
+exploring basic mlp architectures for predicting wine quality
+'''
+
 
 def define_nn_mlp_model(n_1 = 350,n_2 = 350,activ = 'elu'):
     ''' defines multi-layer-perceptron neural network '''
-    # available activation functions at:
-    # https://keras.io/activations/
-    # https://en.wikipedia.org/wiki/Activation_function
-    # options: 'linear', 'sigmoid', 'tanh', 'relu', 'softplus', 'softsign'
-    # there are other ways to initialize the weights besides 'uniform', too
 
     model = Sequential() # sequence of layers
     num_neurons_in_layer = n_1
@@ -39,23 +38,6 @@ def define_nn_mlp_model(n_1 = 350,n_2 = 350,activ = 'elu'):
                     # keep softmax as last layer
     model.compile(loss='mean_squared_error', optimizer='adam')
     return model
-
-# def print_output(model, y_train, y_test, rng_seed):
-#     '''prints model accuracy results'''
-#     y_train_pred = model.predict_classes(X_train, verbose=0)
-#     y_test_pred = model.predict_classes(X_test, verbose=0)
-#     print('\nRandom number generator seed: {}'.format(rng_seed))
-#     print('\nFirst 30 labels:      {}'.format(y_train[:30]))
-#     print('First 30 predictions: {}'.format(y_train_pred[:30]))
-#     train_acc = np.sum(y_train == y_train_pred, axis=0) / X_train.shape[0]
-#     print('\nTraining accuracy: %.2f%%' % (train_acc * 100))
-#     test_acc = np.sum(y_test == y_test_pred, axis=0) / X_test.shape[0]
-#     print('Test accuracy: %.2f%%' % (test_acc * 100))
-#     if test_acc < 0.95:
-#         print("\nMan, that's a poor test accuracy.")
-#         print("Can't you get it up to 95%?")
-#     else:
-#         print("\nYou've made some improvements, I see...")
 
 
 if __name__ == '__main__':

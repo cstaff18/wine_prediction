@@ -9,6 +9,10 @@ from osgeo import gdal, gdalnumeric, ogr, osr
 import pdb
 import pickle
 
+'''
+explores the landsat s3 bucket and retrieves the paths to files for each
+path, row, year for the 2016-17 naming convention
+'''
 
 def create_dict (df):
     scene_dict = {}
